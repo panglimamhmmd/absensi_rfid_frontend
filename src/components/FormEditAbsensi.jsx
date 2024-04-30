@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import dotenv from 'dotenv';
+dotenv.config();
 const FormEditAbsensi = () => {
     const navigate = useNavigate();
     const { id } = useParams();
@@ -21,7 +23,7 @@ const FormEditAbsensi = () => {
         const searchAbsensi = async () => {
             try {
                 const response = await axios.get(
-                    `http://localhost:5000/absensi/${id}`
+                    `http://${process.env.SERVER_ADDRESS}:${process.env.SERVER_PORT}/absensi/${id}`
                 );
                 setJamKeluar(response.data.jam_keluar);
                 setJamMasuk(response.data.jam_masuk);
@@ -42,14 +44,17 @@ const FormEditAbsensi = () => {
     const updateAbsensi = async (e) => {
         e.preventDefault();
         try {
-            await axios.patch(`http://localhost:5000/absensi/${id}`, {
-                jml_siswa: jmlSiswa,
-                jml_soal: jmlSoal,
-                jml_ketik: jmlKetik,
-                jml_paket: jmlPaket,
-                jml_quiziz: jmlQuiziz,
-                lain_lain: lainLain,
-            });
+            await axios.patch(
+                `http://${process.env.SERVER_ADDRESS}:${process.env.SERVER_PORT}/absensi/${id}`,
+                {
+                    jml_siswa: jmlSiswa,
+                    jml_soal: jmlSoal,
+                    jml_ketik: jmlKetik,
+                    jml_paket: jmlPaket,
+                    jml_quiziz: jmlQuiziz,
+                    lain_lain: lainLain,
+                }
+            );
             navigate('/absensi');
         } catch (error) {
             if (error.response) {

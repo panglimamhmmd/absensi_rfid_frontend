@@ -2,7 +2,8 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { formatDate, formatTime } from '../features/dataFormatter';
-
+import dotenv from 'dotenv';
+dotenv.config();
 const AbsensiList = () => {
     const [absensiList, setAbsensiList] = useState([]);
 
@@ -11,7 +12,9 @@ const AbsensiList = () => {
     }, []);
 
     const callProduct = async () => {
-        const response = await axios.get('http://localhost:5000/absensi');
+        const response = await axios.get(
+            `http://${process.env.SERVER_ADDRESS}:${process.env.SERVER_PORT}/absensi`
+        );
         setAbsensiList(response.data);
     };
 

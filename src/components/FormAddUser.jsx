@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import UserCard from './UserCard';
+dotenv.config();
 
 const FormAddUser = () => {
     const [name, setName] = useState('');
@@ -18,14 +19,17 @@ const FormAddUser = () => {
     const saveUser = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:5000/users', {
-                name: name,
-                uuid: noKartu,
-                email: email,
-                password: password,
-                confPassword: confPassword,
-                role: role,
-            });
+            await axios.post(
+                `http://${process.env.SERVER_ADDRESS}:${process.env.SERVER_PORT}/users`,
+                {
+                    name: name,
+                    uuid: noKartu,
+                    email: email,
+                    password: password,
+                    confPassword: confPassword,
+                    role: role,
+                }
+            );
             navigate('/users');
         } catch (error) {
             if (error.response) {
