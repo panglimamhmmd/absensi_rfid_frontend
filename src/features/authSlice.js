@@ -1,7 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import dotenv from 'dotenv';
-dotenv.config();
 
 const initialState = {
     user: null,
@@ -16,7 +14,7 @@ export const LoginUser = createAsyncThunk(
     async (user, thunkAPI) => {
         try {
             const response = await axios.post(
-                `http://${process.env.SERVER_ADDRESS}:${process.env.SERVER_PORT}/login`,
+                `http://${process.env.REACT_APP_SERVER_ADDRESS}:${process.env.REACT_APP_SERVER_PORT}/login`,
                 {
                     email: user.email,
                     password: user.password,
@@ -35,7 +33,7 @@ export const LoginUser = createAsyncThunk(
 export const getMe = createAsyncThunk('user/getMe', async (_, thunkAPI) => {
     try {
         const response = await axios.get(
-            `http://${process.env.SERVER_ADDRESS}:${process.env.SERVER_PORT}/me`
+            `http://${process.env.REACT_APP_SERVER_ADDRESS}:${process.env.REACT_APP_SERVER_PORT}/me`
         );
         return response.data;
     } catch (error) {
@@ -48,7 +46,7 @@ export const getMe = createAsyncThunk('user/getMe', async (_, thunkAPI) => {
 
 export const LogOut = createAsyncThunk('user/LogOut', async () => {
     await axios.delete(
-        `http://${process.env.SERVER_ADDRESS}:${process.env.SERVER_PORT}/logout`
+        `http://${process.env.REACT_APP_SERVER_ADDRESS}:${process.env.REACT_APP_SERVER_PORT}/logout`
     );
 });
 

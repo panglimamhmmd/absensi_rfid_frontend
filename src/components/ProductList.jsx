@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import dotenv from 'dotenv';
-
-dotenv.config();
 
 const ProductList = () => {
     const [products, setProducts] = useState([]);
@@ -14,14 +11,14 @@ const ProductList = () => {
 
     const getProducts = async () => {
         const response = await axios.get(
-            `http://${process.env.SERVER_ADDRESS}:${process.env.SERVER_PORT}/products`
+            `http://${process.env.REACT_APP_SERVER_ADDRESS}:${process.env.REACT_APP_SERVER_PORT}/products`
         );
         setProducts(response.data);
     };
 
     const deleteProduct = async (productId) => {
         await axios.delete(
-            `http://${process.env.SERVER_ADDRESS}:${process.env.SERVER_PORT}/products/${productId}`
+            `http://${process.env.REACT_APP_SERVER_ADDRESS}:${process.env.REACT_APP_SERVER_PORT}/products/${productId}`
         );
         getProducts();
     };

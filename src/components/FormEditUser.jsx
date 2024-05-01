@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
-import dotenv from 'dotenv';
-dotenv.config();
 
 const FormEditUser = () => {
     const [name, setName] = useState('');
@@ -19,7 +17,7 @@ const FormEditUser = () => {
         const getUserById = async () => {
             try {
                 const response = await axios.get(
-                    `http://${process.env.SERVER_ADDRESS}:${process.env.SERVER_PORT}/users/${id}`
+                    `http://${process.env.REACT_APP_SERVER_ADDRESS}:${process.env.REACT_APP_SERVER_PORT}/users/${id}`
                 );
                 setName(response.data.name);
                 setEmail(response.data.email);
@@ -37,16 +35,13 @@ const FormEditUser = () => {
     const updateUser = async (e) => {
         e.preventDefault();
         try {
-            await axios.patch(
-                `http://${process.env.SERVER_ADDRESS}:${process.env.SERVER_PORT}/users/${id}`,
-                {
-                    name: name,
-                    email: email,
-                    password: password,
-                    confPassword: confPassword,
-                    role: role,
-                }
-            );
+            await axios.patch(`http://localhost:5000/users/${id}`, {
+                name: name,
+                email: email,
+                password: password,
+                confPassword: confPassword,
+                role: role,
+            });
             navigate('/users');
         } catch (error) {
             if (error.response) {

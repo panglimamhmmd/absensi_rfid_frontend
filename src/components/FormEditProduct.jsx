@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
-import dotenv from 'dotenv';
-dotenv.config();
+
 const FormEditProduct = () => {
     const [name, setName] = useState('');
     const [price, setPrice] = useState('');
@@ -14,7 +13,7 @@ const FormEditProduct = () => {
         const getProductById = async () => {
             try {
                 const response = await axios.get(
-                    `http://${process.env.SERVER_ADDRESS}:${process.env.SERVER_PORT}/products/${id}`
+                    `http://${process.env.REACT_APP_SERVER_ADDRESS}:${process.env.REACT_APP_SERVER_PORT}/products/${id}`
                 );
                 setName(response.data.name);
                 setPrice(response.data.price);
@@ -30,13 +29,10 @@ const FormEditProduct = () => {
     const updateProduct = async (e) => {
         e.preventDefault();
         try {
-            await axios.patch(
-                `http://${process.env.SERVER_ADDRESS}:${process.env.SERVER_PORT}/products/${id}`,
-                {
-                    name: name,
-                    price: price,
-                }
-            );
+            await axios.patch(`http://localhost:5000/products/${id}`, {
+                name: name,
+                price: price,
+            });
             navigate('/products');
         } catch (error) {
             if (error.response) {

@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import dotenv from 'dotenv';
-dotenv.config();
 
 const FormAddProduct = () => {
     const [name, setName] = useState('');
@@ -13,13 +11,10 @@ const FormAddProduct = () => {
     const saveProduct = async (e) => {
         e.preventDefault();
         try {
-            await axios.post(
-                `http://${process.env.SERVER_ADDRESS}:${process.env.SERVER_PORT}/products`,
-                {
-                    name: name,
-                    price: price,
-                }
-            );
+            await axios.post(`http://localhost:5000/products`, {
+                name: name,
+                price: price,
+            });
             navigate('/products');
         } catch (error) {
             if (error.response) {

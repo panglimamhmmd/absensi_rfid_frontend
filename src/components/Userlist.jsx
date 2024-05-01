@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import dotenv from 'dotenv';
-dotenv.config();
 
 const Userlist = () => {
     const [users, setUsers] = useState([]);
@@ -13,14 +11,14 @@ const Userlist = () => {
 
     const getUsers = async () => {
         const response = await axios.get(
-            `http://${process.env.SERVER_ADDRESS}:${process.env.SERVER_PORT}/users`
+            `http://${process.env.REACT_APP_SERVER_ADDRESS}:${process.env.REACT_APP_SERVER_PORT}/users`
         );
         setUsers(response.data);
     };
 
     const deleteUser = async (userId) => {
         await axios.delete(
-            `http://${process.env.SERVER_ADDRESS}:${process.env.SERVER_PORT}/users/${userId}`
+            `http://${process.env.REACT_APP_SERVER_ADDRESS}:${process.env.REACT_APP_SERVER_PORT}/users/${userId}`
         );
         getUsers();
     };

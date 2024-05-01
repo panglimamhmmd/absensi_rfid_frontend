@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import UserCard from './UserCard';
-dotenv.config();
 
 const FormAddUser = () => {
     const [name, setName] = useState('');
@@ -20,7 +19,7 @@ const FormAddUser = () => {
         e.preventDefault();
         try {
             await axios.post(
-                `http://${process.env.SERVER_ADDRESS}:${process.env.SERVER_PORT}/users`,
+                `http://${process.env.REACT_APP_SERVER_ADDRESS}:${process.env.REACT_APP_SERVER_PORT}/users`,
                 {
                     name: name,
                     uuid: noKartu,
@@ -51,7 +50,9 @@ const FormAddUser = () => {
 
     const getNoKartu = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/tmprfid');
+            const response = await axios.get(
+                `http://${process.env.REACT_APP_SERVER_ADDRESS}:${process.env.REACT_APP_SERVER_PORT}/tmprfid`
+            );
             setNoKartu(response.data.msg.nokartu);
             console.log(response);
         } catch (error) {
@@ -62,7 +63,9 @@ const FormAddUser = () => {
 
     const deleteKartu = async () => {
         try {
-            await axios.delete('http://localhost:5000/tmprfid');
+            await axios.delete(
+                `http://${process.env.REACT_APP_SERVER_ADDRESS}:${process.env.REACT_APP_SERVER_PORT}/tmprfid`
+            );
         } catch (error) {
             console.log(error.message);
         }
