@@ -11,7 +11,9 @@ const AbsensiList = () => {
     }, []);
 
     const callProduct = async () => {
-        const response = await axios.get(`http://localhost:5000/absensi`);
+        const response = await axios.get(
+            `http://${process.env.REACT_APP_SERVER_ADDRESS}:${process.env.REACT_APP_SERVER_PORT}/absensi`
+        );
         setAbsensiList(response.data);
     };
 

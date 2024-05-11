@@ -11,10 +11,13 @@ const FormAddProduct = () => {
     const saveProduct = async (e) => {
         e.preventDefault();
         try {
-            await axios.post(`http://localhost:5000/products`, {
-                name: name,
-                price: price,
-            });
+            await axios.post(
+                `http://${process.env.REACT_APP_SERVER_ADDRESS}:${process.env.REACT_APP_SERVER_PORT}/products`,
+                {
+                    name: name,
+                    price: price,
+                }
+            );
             navigate('/products');
         } catch (error) {
             if (error.response) {
