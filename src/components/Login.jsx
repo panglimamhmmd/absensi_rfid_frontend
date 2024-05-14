@@ -13,12 +13,12 @@ const Login = () => {
         (state) => state.auth
     );
 
-    // useEffect(() => {
-    //     if (user || isSuccess) {
-    //         navigate('/dashboard');
-    //     }
-    //     dispatch(reset());
-    // }, [user, isSuccess, dispatch, navigate]);
+    useEffect(() => {
+        if (user || isSuccess) {
+            navigate('/dashboard');
+        }
+        dispatch(reset());
+    }, [user, isSuccess, dispatch, navigate]);
 
     const Auth = (e) => {
         e.preventDefault();
