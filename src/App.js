@@ -9,6 +9,7 @@ import AddProduct from './pages/AddProduct';
 import EditProduct from './pages/EditProduct';
 import Absensi from './pages/Absensi';
 import EditAbsensi from './pages/EditAbsensi';
+import Register from './components/Register';
 
 function App() {
     return (
@@ -29,6 +30,7 @@ function App() {
                     //
                     <Route path="/absensi" element={<Absensi />} />
                     <Route path="/absensi/edit/:id" element={<EditAbsensi />} />
+                    <Route path="/register" element={<Register />} />
                 </Routes>
             </BrowserRouter>
         </div>
