@@ -31,11 +31,7 @@ const Sidebar = () => {
                             <IoHome /> Dashboard
                         </NavLink>
                     </li>
-                    <li>
-                        <NavLink to={'/products'}>
-                            <IoPricetag /> Products
-                        </NavLink>
-                    </li>
+
                     <li>
                         <NavLink to={'/absensi'}>
                             <IoCalendar /> Absensi
