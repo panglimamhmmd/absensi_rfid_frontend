@@ -61,137 +61,177 @@ const FormEditAbsensi = () => {
             }
         }
     };
+
+    const resetForm = () => {
+        setJmlSiswa(0);
+        setJmlSoal(0);
+        setJmlKetik(0);
+        setJmlPaket(0);
+        setJmlQuiziz(0);
+        setLainLain('');
+    };
     return (
-        <div>
-            <h1 className="title">Absensi</h1>
-            <h2 className="subtitle">Edit Absensi</h2>
-            <h2 className="subtitle">{tanggal}</h2>
-            <div className="card is-shadowless">
+        <div className="col-md-6 col-12">
+            <div className="card">
+                <div className="card-header">
+                    <h3 className="card-title">New Form</h3>
+                    <h4 className="card-title">{tanggal}</h4>
+                    <p className="text-danger">{msg}</p>
+                </div>
                 <div className="card-content">
-                    <div className="content">
-                        <form onSubmit={updateAbsensi}>
-                            <p className="has-text-centered">{msg}</p>
-
-                            <div className="field">
-                                <label className="label">Jam Masuk</label>
-                                <div className="control">
-                                    <input
-                                        type="text"
-                                        className="input"
-                                        value={jamMasuk}
-                                        readOnly
-                                    />
-                                </div>
-                            </div>
-
-                            <div className="field">
-                                <label className="label">Jam Keluar</label>
-                                <div className="control">
-                                    <input
-                                        type="text"
-                                        className="input"
-                                        value={jamKeluar}
-                                        readOnly
-                                    />
-                                </div>
-                            </div>
-
-                            <div className="field">
-                                <label className="label">Jumlah Siswa</label>
-                                <div className="control">
-                                    <input
-                                        type="text"
-                                        className="input"
-                                        value={jmlSiswa}
-                                        onChange={(e) =>
-                                            setJmlSiswa(e.target.value)
-                                        }
-                                    />
-                                </div>
-                            </div>
-
-                            <div className="field">
-                                <label className="label">Jumlah Soal</label>
-                                <div className="control">
-                                    <input
-                                        type="text"
-                                        className="input"
-                                        value={jmlSoal}
-                                        onChange={(e) =>
-                                            setJmlSoal(e.target.value)
-                                        }
-                                    />
-                                </div>
-                            </div>
-
-                            <div className="field">
-                                <label className="label">Jumlah Ketik</label>
-                                <div className="control">
-                                    <input
-                                        type="text"
-                                        className="input"
-                                        value={jmlKetik}
-                                        onChange={(e) =>
-                                            setJmlKetik(e.target.value)
-                                        }
-                                    />
-                                </div>
-                            </div>
-
-                            <div className="field">
-                                <label className="label">
-                                    Jumlah Paket Soal
-                                </label>
-                                <div className="control">
-                                    <input
-                                        type="text"
-                                        className="input"
-                                        value={jmlPaket}
-                                        onChange={(e) =>
-                                            setJmlPaket(e.target.value)
-                                        }
-                                    />
-                                </div>
-                            </div>
-
-                            <div className="field">
-                                <label className="label">
-                                    Jumlah Paket Quiziz
-                                </label>
-                                <div className="control">
-                                    <input
-                                        type="text"
-                                        className="input"
-                                        value={jmlQuiziz}
-                                        onChange={(e) =>
-                                            setJmlQuiziz(e.target.value)
-                                        }
-                                    />
-                                </div>
-                            </div>
-
-                            <div className="field">
-                                <label className="label">Lain-Lain</label>
-                                <div className="control">
-                                    <input
-                                        type="text"
-                                        className="input"
-                                        value={lainLain}
-                                        onChange={(e) =>
-                                            setLainLain(e.target.value)
-                                        }
-                                    />
-                                </div>
-                            </div>
-
-                            <div className="field" id="submitbutton">
-                                <div className="control">
-                                    <button
-                                        type="submit"
-                                        className="button is-success"
-                                    >
-                                        Update
-                                    </button>
+                    <div className="card-body">
+                        <form
+                            className="form form-horizontal"
+                            onSubmit={updateAbsensi}
+                        >
+                            <div className="form-body">
+                                <div className="row">
+                                    <div className="col-md-4">
+                                        <label htmlFor="jam-masuk">
+                                            Jam Masuk
+                                        </label>
+                                    </div>
+                                    <div className="col-md-8 form-group">
+                                        <input
+                                            type="time"
+                                            readOnly
+                                            className="form-control"
+                                            id="jam-masuk"
+                                            value={jamMasuk}
+                                            onChange={(e) =>
+                                                setJamMasuk(e.target.value)
+                                            }
+                                        />
+                                    </div>
+                                    <div className="col-md-4">
+                                        <label htmlFor="jam-keluar">
+                                            Jam Keluar
+                                        </label>
+                                    </div>
+                                    <div className="col-md-8 form-group">
+                                        <input
+                                            type="time"
+                                            readOnly
+                                            className="form-control"
+                                            id="jam-keluar"
+                                            value={jamKeluar}
+                                            onChange={(e) =>
+                                                setJamKeluar(e.target.value)
+                                            }
+                                        />
+                                    </div>
+                                    <div className="col-md-4">
+                                        <label htmlFor="jml-siswa">
+                                            Jumlah Siswa
+                                        </label>
+                                    </div>
+                                    <div className="col-md-8 form-group">
+                                        <input
+                                            type="number"
+                                            className="form-control"
+                                            id="jml-siswa"
+                                            value={jmlSiswa}
+                                            onChange={(e) =>
+                                                setJmlSiswa(e.target.value)
+                                            }
+                                        />
+                                    </div>
+                                    <div className="col-md-4">
+                                        <label htmlFor="jml-soal">
+                                            Jumlah Soal
+                                        </label>
+                                    </div>
+                                    <div className="col-md-8 form-group">
+                                        <input
+                                            type="number"
+                                            className="form-control"
+                                            id="jml-soal"
+                                            value={jmlSoal}
+                                            onChange={(e) =>
+                                                setJmlSoal(e.target.value)
+                                            }
+                                        />
+                                    </div>
+                                    <div className="col-md-4">
+                                        <label htmlFor="jml-ketik">
+                                            Jumlah Ketik
+                                        </label>
+                                    </div>
+                                    <div className="col-md-8 form-group">
+                                        <input
+                                            type="number"
+                                            className="form-control"
+                                            id="jml-ketik"
+                                            value={jmlKetik}
+                                            onChange={(e) =>
+                                                setJmlKetik(e.target.value)
+                                            }
+                                        />
+                                    </div>
+                                    <div className="col-md-4">
+                                        <label htmlFor="jml-paket">
+                                            Jumlah Paket
+                                        </label>
+                                    </div>
+                                    <div className="col-md-8 form-group">
+                                        <input
+                                            type="number"
+                                            className="form-control"
+                                            id="jml-paket"
+                                            value={jmlPaket}
+                                            onChange={(e) =>
+                                                setJmlPaket(e.target.value)
+                                            }
+                                        />
+                                    </div>
+                                    <div className="col-md-4">
+                                        <label htmlFor="jml-quiziz">
+                                            Jumlah Quiziz
+                                        </label>
+                                    </div>
+                                    <div className="col-md-8 form-group">
+                                        <input
+                                            type="number"
+                                            className="form-control"
+                                            id="jml-quiziz"
+                                            value={jmlQuiziz}
+                                            onChange={(e) =>
+                                                setJmlQuiziz(e.target.value)
+                                            }
+                                        />
+                                    </div>
+                                    <div className="col-md-4">
+                                        <label htmlFor="lain-lain">
+                                            Lain-Lain
+                                        </label>
+                                    </div>
+                                    <div className="col-md-8 form-group">
+                                        <textarea
+                                            class="form-control"
+                                            id="exampleFormControlTextarea1"
+                                            rows="3"
+                                            style={{ height: '130px' }}
+                                            value={lainLain}
+                                            onChange={(e) =>
+                                                setLainLain(e.target.value)
+                                            }
+                                        ></textarea>
+                                    </div>
+                                    <div className="col-sm-12 d-flex justify-content-end">
+                                        <button
+                                            type="submit"
+                                            className="btn btn-primary me-1 mb-1"
+                                        >
+                                            Submit
+                                        </button>
+                                        <button
+                                            type="reset"
+                                            onClick={resetForm}
+                                            className="btn btn-light-secondary me-1 mb-1"
+                                        >
+                                            Reset
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </form>
