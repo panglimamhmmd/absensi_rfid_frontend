@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const Userlist = () => {
+    const location = useLocation();
     const [users, setUsers] = useState([]);
+    const limit = 30;
 
     useEffect(() => {
         getUsers();
@@ -59,7 +62,7 @@ const Userlist = () => {
                     <div className="card-body">
                         <div className=" d-flex justify-content-between mx-auto">
                             <div>
-                                <h1>Daftar User</h1>
+                                <h1>Daftar Pengajar</h1>
                             </div>
 
                             <div>
@@ -67,7 +70,7 @@ const Userlist = () => {
                                     to="/users/add"
                                     className="btn btn-success"
                                 >
-                                    Add User
+                                    Tambah Pengajar
                                 </Link>
                             </div>
                         </div>

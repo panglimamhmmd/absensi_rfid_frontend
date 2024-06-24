@@ -5,6 +5,10 @@ import { useSelector } from 'react-redux';
 const MazerSidebar = () => {
     const { user } = useSelector((state) => state.auth);
     const location = useLocation();
+
+    // month in indonesia
+    const month = new Date().toLocaleString('default', { month: 'long' });
+
     return (
         <div id="sidebar">
             <div className="sidebar-wrapper active">
@@ -47,7 +51,7 @@ const MazerSidebar = () => {
                                         className="sidebar-link"
                                     >
                                         <i className="bi bi-people-fill"></i>
-                                        <span>Manage Users</span>
+                                        <span>Daftar Pengajar</span>
                                     </NavLink>
                                 </li>
                                 <li
@@ -62,15 +66,31 @@ const MazerSidebar = () => {
                                         className="sidebar-link active"
                                     >
                                         <i className="bi bi-person-fill-add"></i>
-                                        <span>Add User</span>
+                                        <span>Tambah Pengajar</span>
                                     </NavLink>
                                 </li>
                             </div>
                         )}
                         <li className="sidebar-title">
                             <span className="text-secondary">
-                                Attendance Management
+                                Presensi Management
                             </span>
+                        </li>
+
+                        <li
+                            className={`sidebar-item ${
+                                location.pathname === '/rekapitulasi'
+                                    ? 'active'
+                                    : ''
+                            }`}
+                        >
+                            <NavLink
+                                to={'/rekapitulasi'}
+                                className="sidebar-link"
+                            >
+                                <i className="bi bi-calendar-fill"></i>
+                                <span>Daftar Presensi</span>
+                            </NavLink>
                         </li>
 
                         <li
@@ -80,39 +100,9 @@ const MazerSidebar = () => {
                         >
                             <NavLink to={'/absensi'} className="sidebar-link">
                                 <i className="bi bi-tag-fill"></i>
-                                <span>Manage Attendance</span>
+                                <span>Presensi: {month}</span>
                             </NavLink>
                         </li>
-                        {/* <li
-                            className={`sidebar-item ${
-                                location.pathname === '/products/add'
-                                    ? 'active'
-                                    : ''
-                            }`}
-                        >
-                            <NavLink
-                                to={'/products/add'}
-                                className="sidebar-link"
-                            >
-                                <i className="bi bi-bag-plus-fill"></i>
-                                <span>Add Product</span>
-                            </NavLink>
-                        </li> */}
-                        {/* <li className="sidebar-title">
-                            <span className="text-secondary">Categories</span>
-                        </li>
-                        <li
-                            className={`sidebar-item ${
-                                location.pathname === '/category'
-                                    ? 'active'
-                                    : ''
-                            }`}
-                        >
-                            <Link to="/category" className="sidebar-link">
-                                <i className="bi bi-grid-fill" />
-                                <span>Categories</span>
-                            </Link>
-                        </li> */}
                     </ul>
                 </div>
             </div>

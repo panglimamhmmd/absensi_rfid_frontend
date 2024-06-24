@@ -155,6 +155,7 @@ const Login = () => {
                                     id="form3Example4"
                                     className="form-control form-control-lg"
                                     placeholder="Enter password"
+                                    required
                                     value={password}
                                     onChange={(e) =>
                                         setPassword(e.target.value)

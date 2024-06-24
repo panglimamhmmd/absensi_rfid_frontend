@@ -7,12 +7,15 @@ import EditUser from './pages/EditUser';
 import Absensi from './pages/Absensi';
 import EditAbsensi from './pages/EditAbsensi';
 import Register from './components/Register';
-
+import Rekapitulasi from './pages/Rekapitulasi';
+import MonthlyRekap from './pages/MonthlyRekap';
+import UserRekap from './pages/UserRekap';
 function App() {
     return (
         <div>
             <BrowserRouter>
                 <Routes>
+                    <Route path="/index" redirectTo="/" />
                     <Route path="/" element={<Login />} />
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/users" element={<Users />} />
@@ -21,6 +24,15 @@ function App() {
                     <Route path="/absensi" element={<Absensi />} />
                     <Route path="/absensi/edit/:id" element={<EditAbsensi />} />
                     <Route path="/register" element={<Register />} />
+                    <Route path="/rekapitulasi" element={<Rekapitulasi />} />
+                    <Route
+                        path="/rekapitulasi/details"
+                        element={<MonthlyRekap />}
+                    />
+                    <Route
+                        path="/rekapitulasi/details/users"
+                        element={<UserRekap />}
+                    />
                 </Routes>
             </BrowserRouter>
         </div>

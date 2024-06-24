@@ -5,16 +5,25 @@ import { formatDate, formatTime } from '../features/dataFormatter';
 
 const AbsensiList = () => {
     const [absensiList, setAbsensiList] = useState([]);
+    const [prev, setPrev] = useState(0);
+    const [next, setNext] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPage, setTotalPage] = useState(0);
+    const limit = 10;
 
     useEffect(() => {
-        callProduct();
-    }, []);
+        callProduct(currentPage);
+    }, [currentPage, absensiList]);
 
-    const callProduct = async () => {
+    const callProduct = async (page) => {
         const response = await axios.get(
-            `http://${process.env.REACT_APP_SERVER_ADDRESS}:${process.env.REACT_APP_SERVER_PORT}/absensi`
+            `http://${process.env.REACT_APP_SERVER_ADDRESS}:${process.env.REACT_APP_SERVER_PORT}/absensi?page=${page}&limit=${limit}`
         );
-        setAbsensiList(response.data);
+        const { data, pagination } = response.data;
+        setAbsensiList(data);
+        setNext(pagination.next);
+        setPrev(pagination.prev);
+        setTotalPage(pagination.totalPage);
     };
 
     const deleteAbsensi = async (uuid) => {
@@ -22,24 +31,76 @@ const AbsensiList = () => {
             await axios.delete(
                 `http://${process.env.REACT_APP_SERVER_ADDRESS}:${process.env.REACT_APP_SERVER_PORT}/absensi/${uuid}`
             );
-            callProduct();
+            callProduct(currentPage);
         } catch (error) {
             console.log(error.message);
         }
     };
+
+    const handleNext = () => {
+        if (currentPage < totalPage) {
+            setCurrentPage(currentPage + 1);
+        }
+    };
+
+    const handlePrev = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1);
+        }
+    };
+
+    const month = [
+        'Januari',
+        'Februari',
+        'Maret',
+        'April',
+        'Mei',
+        'Juni',
+        'Juli',
+        'Agustus',
+        'September',
+        'Oktober',
+        'November',
+        'Desember',
+    ];
+
+    const thisMonth = new Date().getMonth() + 1;
+    const thisYear = new Date().getFullYear();
+
     return (
         <div className="col-12 col-md-12">
+            <div className="row">
+                <div className="col-md-2">
+                    <div className="card">
+                        <div className="card-body">
+                            <p>Bulan: </p>
+
+                            <h5> {month[thisMonth - 1]} </h5>
+                        </div>
+                    </div>
+                </div>
+                <div className="col-md-2">
+                    <div className="card">
+                        <div className="card-body">
+                            <p>Tahun: </p>
+                            <p>
+                                <h5> {thisYear} </h5>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div className="card">
                 <div className="card-content">
                     <div className="card-body">
                         <div className=" d-flex justify-content-between mx-auto">
                             <div>
-                                <h1>List Absensi Pengajar</h1>
+                                <h1>List Presensi</h1>
                             </div>
                         </div>
 
                         <div className="table-responsive">
-                            <table className="table table-lg table-hover">
+                            <table className="table table-lg table-hover text-center">
                                 <thead>
                                     <tr>
                                         <th>No</th>
@@ -59,7 +120,14 @@ const AbsensiList = () => {
                                 <tbody>
                                     {absensiList.map((absen, index) => (
                                         <tr key={absen.uuid}>
-                                            <th> {index + 1} </th>
+                                            <td>
+                                                {currentPage > 1
+                                                    ? limit *
+                                                          (currentPage - 1) +
+                                                      index +
+                                                      1
+                                                    : index + 1}
+                                            </td>
                                             <td>
                                                 {absen.user
                                                     ? absen.user.name
@@ -122,6 +190,62 @@ const AbsensiList = () => {
                                 </tbody>
                             </table>
                         </div>
+
+                        <nav aria-label="Page navigation example">
+                            <ul className="pagination pagination-primary  justify-content-center">
+                                <li className="page-item ">
+                                    <button
+                                        className="page-link"
+                                        onClick={handlePrev}
+                                    >
+                                        Previous
+                                    </button>
+                                </li>
+                                {/* prev page */}
+
+                                {prev ? (
+                                    <li className="page-item ">
+                                        <button
+                                            className="page-link"
+                                            onClick={handlePrev}
+                                        >
+                                            {prev}
+                                        </button>
+                                    </li>
+                                ) : null}
+
+                                {/* current page */}
+                                <li className="page-item active">
+                                    <button
+                                        className="page-link"
+                                        onClick={handlePrev}
+                                    >
+                                        {currentPage}
+                                    </button>
+                                </li>
+
+                                {/* next page */}
+                                {next ? (
+                                    <li className="page-item">
+                                        <button
+                                            className="page-link"
+                                            onClick={handleNext}
+                                        >
+                                            {next}
+                                        </button>
+                                    </li>
+                                ) : null}
+
+                                <li className="page-item">
+                                    <button
+                                        className="page-link"
+                                        onClick={handleNext}
+                                    >
+                                        Next
+                                    </button>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
             </div>

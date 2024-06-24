@@ -56,7 +56,7 @@ const MazerLayout = ({ children }) => {
                         <div className="d-flex justify-content-between mx-auto">
                             <div className="">
                                 <div className="page-heading">
-                                    <h3>BM Absensi Application</h3>
+                                    <h3>BM Presensi Application</h3>
                                     <p>{getFormattedTime()}</p>
                                 </div>
                             </div>
@@ -105,8 +105,8 @@ const MazerLayout = ({ children }) => {
                     </div>
 
                     {children}
+                    <Footer />
                 </div>
-                <Footer />
             </div>
         </React.Fragment>
     );

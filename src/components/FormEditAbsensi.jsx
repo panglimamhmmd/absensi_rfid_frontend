@@ -70,12 +70,35 @@ const FormEditAbsensi = () => {
         setJmlQuiziz(0);
         setLainLain('');
     };
+    const monthNames = [
+        'Januari',
+        'Februari',
+        'Maret',
+        'April',
+        'Mei',
+        'Juni',
+        'Juli',
+        'Agustus',
+        'September',
+        'Oktober',
+        'November',
+        'Desember',
+    ];
+
+    // make a function to format date from dd mm yyyy to dd month yyyy
+    const formatDate = (dateString) => {
+        // Split the date string by '-'
+        const [year, month, day] = dateString.split('-');
+        // Return the formatted date string
+        return `${day} ${monthNames[parseInt(month) - 1]} ${year}`;
+    };
+
     return (
         <div className="col-md-6 col-12">
             <div className="card">
                 <div className="card-header">
-                    <h3 className="card-title">New Form</h3>
-                    <h4 className="card-title">{tanggal}</h4>
+                    <h3 className="card-title">Kegiatan Absensi</h3>
+                    <h4 className="card-title">{formatDate(tanggal)}</h4>
                     <p className="text-danger">{msg}</p>
                 </div>
                 <div className="card-content">

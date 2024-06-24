@@ -83,7 +83,7 @@ const FormAddUser = () => {
         <div className="col-md-6 col-12">
             <div className="card">
                 <div className="card-header">
-                    <h3 className="card-title">Add New User</h3>
+                    <h3 className="card-title">Tambahkan Pengajar</h3>
                     <p className="text-danger">{msg}</p>
                 </div>
                 <div className="card-content">

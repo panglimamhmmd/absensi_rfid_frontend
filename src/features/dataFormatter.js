@@ -22,7 +22,7 @@ export const formatDate = (dateString) => {
     const monthStr = monthNames[parseInt(month) - 1];
 
     // Format the date
-    const formattedDate = `${monthStr}, ${day} ${year}`;
+    const formattedDate = `${day} ${monthStr} ${year}`;
     return formattedDate;
 };
 

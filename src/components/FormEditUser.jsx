@@ -57,7 +57,7 @@ const FormEditUser = () => {
         <div className="col-md-6 col-12">
             <div className="card">
                 <div className="card-header">
-                    <h3 className="card-title">Edit User: {name}</h3>
+                    <h3 className="card-title">Edit Pengajar: {name}</h3>
                     <p className="text-danger">{msg}</p>
                 </div>
                 <div className="card-content">

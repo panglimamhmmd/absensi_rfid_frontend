@@ -1,28 +1,28 @@
 import React, { useEffect } from 'react';
-import Welcome from '../components/Welcome';
 import NewLayout from './NewLayout';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { getMe } from '../features/authSlice';
-
-const Dashboard = () => {
+import UserRekapList from '../components/UserRekapList';
+const UserRekap = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const { isError } = useSelector((state) => state.auth);
 
     useEffect(() => {
         dispatch(getMe());
     }, [dispatch]);
 
-    // useEffect(() => {
-    //   if (isError) {
-    //     navigate("/");
-    //   }
-    // }, [isError, navigate]);
-
+    useEffect(() => {
+        if (isError) {
+            navigate('/');
+        }
+    }, [isError, navigate]);
     return (
         <NewLayout>
-            <Welcome />
+            <UserRekapList />
         </NewLayout>
     );
 };
 
-export default Dashboard;
+export default UserRekap;
